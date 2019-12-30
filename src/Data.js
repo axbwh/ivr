@@ -1,12 +1,12 @@
 import Tabletop from 'tabletop'
-import mapboxgl from 'mapbox-gl'
 import mapboxGeo from '@mapbox/mapbox-sdk/services/geocoding'
 import _ from 'lodash'
 
 const tableKey = 'https://docs.google.com/spreadsheets/d/1-sK-WkmTl6jxObbsbMDxJtLcMQGbev7U0Xed0barAeQ/edit?usp=sharing'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXhid2giLCJhIjoiY2s0bmpmZWlrMzNqYTNubmFhdzRpcWpwciJ9.suGRP9vc9Hv2POzpHBQ3-g'
-const geocoding = mapboxGeo({ accessToken: mapboxgl.accessToken })
+const TOKEN = 'pk.eyJ1IjoiYXhid2giLCJhIjoiY2s0bmpmZWlrMzNqYTNubmFhdzRpcWpwciJ9.suGRP9vc9Hv2POzpHBQ3-g'
+
+const geocoding = mapboxGeo({ accessToken: TOKEN })
 
 const isLat = (lat) => {
     return isFinite(parseFloat(lat)) && Math.abs(lat) <= 90;
@@ -27,9 +27,18 @@ class Data {
 
     processData = data => {
 
+        data.forEach(p =>{
+            p.x = 0
+            p.y = 0
+        })
+
         //We need to geocode all projects without lat & lng fields
         //We split projects with lat lng in one array
-        let projectsGeo = data.filter(p => isLat(p.Lat) && isLng(p.Lng))
+        let projectsGeo = data.filter(p => {
+            p.Lat = parseFloat(p.Lat)
+            p.Lng = parseFloat(p.Lng)
+            return isLat(p.Lat) && isLng(p.Lng)
+        })
 
         //Projects with location queries into another, projects with neither are ignored
         let projectsQry = _.difference(data, projectsGeo).filter(p => Boolean(p.Location))

@@ -1,0 +1,6 @@
+ivr-marker {
+  width: markerSize;
+  height: markerSize;
+  border-radius: "50%";
+  background-color: "#fff";
+}
