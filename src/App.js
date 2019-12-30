@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import Map from './Map'
 import Loader from './Loader'
-import Data from './Data'
+import Data, {TOKEN} from './Data'
 import 'mapbox-gl/src/css/mapbox-gl.css'
 import './App.css'
 
@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <div className='App'>
         {this.state.isFetching ? <Loader /> :
-          <Map projects={this.state.projects} callback={this.getFocusNode} />
+          <Map projects={this.state.projects} callback={this.getFocusNode}/>
         }
         <Nav focusNode={this.state.focusNode} />
       </div>
@@ -41,9 +41,9 @@ class App extends Component {
   }
 
   getFocusNode = node => {
+    console.log(node.Name)
     this.setState({ focusNode: node })
   }
-
 }
 
-export default App;
+export default App

@@ -3,7 +3,6 @@ import mapboxGeo from '@mapbox/mapbox-sdk/services/geocoding'
 import _ from 'lodash'
 
 const tableKey = 'https://docs.google.com/spreadsheets/d/1-sK-WkmTl6jxObbsbMDxJtLcMQGbev7U0Xed0barAeQ/edit?usp=sharing'
-
 const TOKEN = 'pk.eyJ1IjoiYXhid2giLCJhIjoiY2s0bmpmZWlrMzNqYTNubmFhdzRpcWpwciJ9.suGRP9vc9Hv2POzpHBQ3-g'
 
 const geocoding = mapboxGeo({ accessToken: TOKEN })
@@ -73,8 +72,15 @@ class Data {
                     }
                 })
             })
+
+            let dataParsed = projectsQry.concat(projectsGeo)
+
+            dataParsed.forEach(p => {
+                p.sLng = p.Lng 
+                p.sLat = p.Lat
+            })
             // merge both arrays and callback
-            this.callback(projectsQry.concat(projectsGeo))
+            this.callback(dataParsed)
         })
 
     }
@@ -82,3 +88,4 @@ class Data {
 
 
 export default Data
+export {TOKEN}
