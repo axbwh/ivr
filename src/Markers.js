@@ -16,7 +16,8 @@ const Markers = React.memo(({ projects, callback, query = ['Led', 'Collaboration
                         width: size,
                         height: size,
                         borderRadius: '50%',
-                        backgroundColor: '#fff'
+                        backgroundColor: '#fff',
+                        boxShadow:'0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
                     }}>{p.Name}</div>
             </Marker>
         }

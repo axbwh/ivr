@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Nav from './Nav'
 import Map from './Map'
 import Loader from './Loader'
 import Data, {TOKEN} from './Data'
@@ -12,8 +11,7 @@ class App extends Component {
     super()
     this.state = {
       projects: [],
-      isFetching: true,
-      focusNode: undefined,
+      isFetching: true
     }
     this.onDataLoad = this.onDataLoad.bind(this)
   }
@@ -35,15 +33,11 @@ class App extends Component {
         {this.state.isFetching ? <Loader /> :
           <Map projects={this.state.projects} callback={this.getFocusNode}/>
         }
-        <Nav focusNode={this.state.focusNode} />
       </div>
     )
   }
 
-  getFocusNode = node => {
-    console.log(node.Name)
-    this.setState({ focusNode: node })
-  }
+  
 }
 
 export default App

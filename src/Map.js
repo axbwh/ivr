@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import ReactMapGL from 'react-map-gl'
+import Nav from './Nav'
 import './Map.css'
 
-import {TOKEN} from './Data'
-import  OrderNodes  from './MapUtils'
+import { TOKEN } from './Data'
+import OrderNodes from './MapUtils'
 import Markers from './Markers'
 
 
@@ -23,18 +24,38 @@ class Map extends Component {
                 maxZoom: 3,
             },
             activeNode: null,
-            projects: this.props.projects
+            projects: this.props.projects,
+            query: ['Led', 'Collaboration', 'Inspired'],
+            node : null
         }
+
         this.orderNodes = this.orderNodes.bind(this)
+        this.filterNodes = this.filterNodes.bind(this)
+        this.getFocusNode = this.getFocusNode.bind(this)
     }
 
     _updateViewport = viewport => {
         this.setState({ viewport });
     }
 
-    orderNodes(){
-        OrderNodes(this.state.projects, this.map)
+    orderNodes() {
+        this.setState(prevState => {
+        let newProjects = [...prevState.projects]
+        
+        OrderNodes(newProjects, this.map, this.state.query)
+
+        return { projects: newProjects}
+        })
     }
+    
+    filterNodes(query){
+        this.setState({query: query}, this.orderNodes)
+        
+    }
+
+    getFocusNode = node => {
+        this.setState({ node: node })
+      }
 
     componentDidMount() {
         this.map = this.mapRef.current.getMap()
@@ -45,16 +66,19 @@ class Map extends Component {
     render() {
         const { viewport } = this.state
         return (
-            <ReactMapGL
-                {...viewport}
-                mapStyle="mapbox://styles/axbwh/ck4n9ufn50bor1cp62o1oa5yp"
-                onViewportChange={this._updateViewport}
-                dragRotate={false}
-                mapboxApiAccessToken={TOKEN}
-                ref={this.mapRef}
-            >
-                <Markers projects={this.state.projects} callback={this.props.callback} query={['Led', 'Collaboration', 'Inspired']} />
-            </ReactMapGL>
+            <div>
+                <ReactMapGL
+                    {...viewport}
+                    mapStyle="mapbox://styles/axbwh/ck4n9ufn50bor1cp62o1oa5yp"
+                    onViewportChange={this._updateViewport}
+                    dragRotate={false}
+                    mapboxApiAccessToken={TOKEN}
+                    ref={this.mapRef}
+                >
+                    <Markers projects={this.state.projects} callback={this.getFocusNode} query={this.state.query} />
+                </ReactMapGL>
+                <Nav node={this.state.node} callback={this.filterNodes} />
+            </div>
         )
     }
 }

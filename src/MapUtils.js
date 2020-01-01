@@ -23,13 +23,16 @@ const circleRadius = (arr, nodesize = 30, padding = 25) => {
     return radius > nodesize ? radius : nodesize
 }
 
-const orderNodes = (projects, map) => {
+const orderNodes = (projects, map, query) => {
+
     projects.forEach((p, i) => {
         p.x = 0
         p.y = 0
         p.Lat = p.sLat
         p.Lng = p.sLng
     })
+    //filter out nodes not in type query (array of checked project types)
+    projects = projects.filter(p => query.includes(p.Type))
 
     let groupDist = markerSize * 2
 
@@ -52,7 +55,6 @@ const orderNodes = (projects, map) => {
         let groupCenter = getCentroid(g.map(p => [p.Lng, p.Lat]))
 
         let radius = circleRadius(g, 30, 25)
-        console.log(groupCenter)
 
         g.forEach((p, i) => {
             p.Lng = groupCenter.lng

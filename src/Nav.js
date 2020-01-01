@@ -1,27 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import DetailPane from './DetailPane'
 
 class Check extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            checked: true
-        }
-        this.handleCheck = this.handleCheck.bind(this)
-    }
-
-    handleCheck() {
-        this.setState(pState => {
-            return { checked: !pState.checked }
-        })
-        this.props.callback(this.props.type) 
-    }
-
     render() {
-        console.log(this.props.type, this.state.checked)
+
+        const style = {
+            display: 'flex',
+            flexDirection: 'row'
+        }
+
         return (
-            <div>
-                <input type="checkbox" checked={this.props.checked} onChange={this.handleCheck} />
+            <div style={style}>
+                <input type="checkbox" checked={this.props.checked} onChange={() => this.props.callback(this.props.type)} />
                 <div>{this.props.type}</div>
             </div>
         )
@@ -33,38 +23,90 @@ class Nav extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            types : ['Led', 'Collaboration', 'Inspired']
+            types: [{ type: 'Led', checked: true },
+            { type: 'Collaboration', checked: true },
+            { type: 'Inspired', checked: true }],
+            detail: true
         }
         this.handleCheck = this.handleCheck.bind(this)
+        this.handleDetail = this.handleDetail.bind(this)
     }
 
-    handleCheck(type, checked) {
-        console.log('changed', type)
-        // this.setState(prevState =>{
-        //     prevState.map()
-        // })
+    handleCheck(type) {
+        this.setState(prevState => {
+            const newTypes = prevState.types.map(t => {
 
-        // if ( this.state.types.includes(type) && checked === false) {
-        //     this.setState({ types: this.state.types.filter(t => t !== type) })
+                t.checked = t.type === type ? !t.checked : t.checked
 
-        // } else if (!this.state.types.includes(type) && checked === true){
-        //     this.setState({ type: this.state.types.push(type) })
-            
-        // }
-        
+                return t
+            })
+
+            return {
+                types: newTypes
+            }
+        },
+            () => this.props.callback(this.state.types.filter(t => t.checked).map(t => t.type))
+        )
+
+    }
+
+    handleDetail(detail) {
+        this.setState(prevState => { return { detail: !prevState.detail } })
     }
 
 
     render() {
+        const style = {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'row',
+            width: 'calc(100% - 40px)',
+            justifyContent: 'space-between'
+        }
+
+        const styleChecks = {
+            display: 'flex',
+            flexDirection: 'row'
+        }
+
+        const styleDetail = {
+            position: 'fixed',
+            top: 40,
+            right: 0,
+            padding: 20,
+            background:'white',
+            boxShadow:'0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        }
+
         return (
-            <div>
-                <Check type='Led' callback={this.handleCheck} />
-                <Check type='Collaboration' callback={this.handleCheck} />
-                <Check type='Inspired' callback={this.handleCheck} />
-            </div>
+            <Fragment>
+                <div style={style}>
+
+                    <div style={styleChecks}>
+                        {this.state.types.map(t => {
+                            return <Check key={t.type} type={t.type} checked={t.checked} callback={this.handleCheck} />
+                        })}
+                    </div>
+
+                    <div style={styleChecks}>
+                        { this.props.node ? <div>{this.props.node.Name}</div> : null}
+                        <Check type={'detail'} checked={this.state.detail} callback={this.handleDetail} />
+                    </div>
+
+                </div>
+                {
+                    this.state.detail && this.props.node ? (
+                        <div style={styleDetail}>
+                            <DetailPane node={this.props.node} />
+                        </div>
+                    ) : (null)
+                }
+            </Fragment>
         )
     }
-
 }
 
 export default Nav
