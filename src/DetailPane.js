@@ -1,44 +1,52 @@
 import React, { Component, Fragment } from 'react'
 import ReactPlayer from 'react-player'
 import Img from 'react-image'
+import './DetailPane.css'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 
 class DetailPane extends Component {
 
     render() {
-        const media = this.props.node.Media
-        const style = {
-            position: 'relative',
-            width: 400,
-        }
 
         return (
-            <div style={style}>
-                {this.parseMedia(this.props.node.Media, <p>{this.props.node.Website}</p>)}
-                {this.row('Indigenous |', this.props.node.Type)}
-                {this.row('Indigenous Nation |', this.props.node.IndigenousNation)}
-                {this.row('Platform |', this.props.node.Platform)}
-                {this.row('Website |', )}
-                {this.row('Creatives |', this.parseCreatives(this.props.node.Creatives))}
-                {this.parseResume(this.props.node.Resume)}
+            <div className='detail-pane'>
+                <Scrollbars
+                    autoWidth
+                    autoHeight
+                    autoHeightMin={0}
+                    autoHeightMax={'60vh'}
+                    renderThumbVertical={props => <div {...props} className="thumb-vertical" />}>
+
+                    <div className='detail-wrap'>
+
+                        {!this.props.node ?
+                            <div className='detail-center'>
+                                <i>Select A Node to View Project Details</i>
+                            </div> : <Fragment>
+                                {this.parseMedia(this.props.node.Media, this.props.node.Website)}
+                                {this.row('Indigenous |', this.props.node.Type)}
+                                {this.row('Indigenous Nation |', this.props.node.IndigenousNation)}
+                                {this.row('Platform |', this.props.node.Platform)}
+                                {this.row('Website |', this.parseWebsite(this.props.node.Website))}
+                                {this.parseCreatives(this.props.node.Creatives)}
+                                {this.parseResume(this.props.node.Resume)}
+                            </Fragment>
+                        }
+
+                    </div>
+
+                </Scrollbars>
             </div>
         )
     }
 
     row(left, right) {
 
-        const styleDiv = {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: 16,
-            marginBottom: 16
-        }
-
         return !right ? null : (
-            <div style={styleDiv}>
-                <div>{left}</div>
-                <div>{right}</div>
+            <div className='detail-row'>
+                <div className='detail-row-left'><div>{left}</div></div>
+                <div className='detail-row-right'><div>{right}</div></div>
             </div>
         )
     }
@@ -48,8 +56,8 @@ class DetailPane extends Component {
 
         if (ReactPlayer.canPlay(media)) {
             return (
-                <div style={{ position: 'relative', paddingTop: '56.25%', width: '100%' }}>
-                    <ReactPlayer style={{ position: 'absolute', top: 0, left: 0 }}
+                <div className='detail-player-wrap'>
+                    <ReactPlayer className='detail-player'
                         url={this.props.node.Media}
                         width='100%'
                         height='100%'
@@ -61,7 +69,7 @@ class DetailPane extends Component {
         return (
             <div>
                 <a href={website} target="_blank" rel="noopener noreferrer">
-                    <Img style={{ width: '100%' }}
+                    <Img className='detail-img'
                         src={media}
                     />
                 </a>
@@ -82,13 +90,16 @@ class DetailPane extends Component {
         const array = creatives.split(',')
 
         return !creatives ? null : (
-            array.map(c => <div key={c}>{c}</div>)
+            <div className='detail-row'>
+                <div className='detail-row-left'><div>Creatives |</div></div>
+                <div className='detail-row-right'>{array.map(c => <div key={c}>{c}</div>)}</div>
+            </div>
         )
     }
 
     parseResume(resume) {
 
-        return !resume ? null :(
+        return !resume ? null : (
             <Fragment>
                 <hr />
                 <p>{resume}</p>

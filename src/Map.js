@@ -26,12 +26,14 @@ class Map extends Component {
             activeNode: null,
             projects: this.props.projects,
             query: ['Led', 'Collaboration', 'Inspired'],
-            node : null
+            node: null,
+            hover: null
         }
 
         this.orderNodes = this.orderNodes.bind(this)
         this.filterNodes = this.filterNodes.bind(this)
         this.getFocusNode = this.getFocusNode.bind(this)
+        this.getHoverNode = this.getHoverNode.bind(this)
     }
 
     _updateViewport = viewport => {
@@ -40,22 +42,27 @@ class Map extends Component {
 
     orderNodes() {
         this.setState(prevState => {
-        let newProjects = [...prevState.projects]
-        
-        OrderNodes(newProjects, this.map, this.state.query)
+            let newProjects = [...prevState.projects]
 
-        return { projects: newProjects}
+            OrderNodes(newProjects, this.map, this.state.query)
+
+            return { projects: newProjects }
         })
     }
-    
-    filterNodes(query){
-        this.setState({query: query}, this.orderNodes)
-        
+
+    filterNodes(query) {
+        this.setState({ query: query }, this.orderNodes)
+
     }
 
     getFocusNode = node => {
         this.setState({ node: node })
-      }
+    }
+
+    getHoverNode = node => {
+        console.log(node)
+        this.setState({ hover: node })
+    }
 
     componentDidMount() {
         this.map = this.mapRef.current.getMap()
@@ -75,7 +82,15 @@ class Map extends Component {
                     mapboxApiAccessToken={TOKEN}
                     ref={this.mapRef}
                 >
-                    <Markers projects={this.state.projects} callback={this.getFocusNode} query={this.state.query} />
+                    <Markers
+                        projects={this.state.projects}
+                        handleClick={this.getFocusNode}
+                        handleHover={this.getHoverNode}
+                        query={this.state.query}
+                        hover={this.state.hover}
+                        active={this.state.node}
+                    />
+                    
                 </ReactMapGL>
                 <Nav node={this.state.node} callback={this.filterNodes} />
             </div>

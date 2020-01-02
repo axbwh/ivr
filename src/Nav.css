@@ -1,0 +1,71 @@
+.nav-wrap,
+.nav-filter-wrap,
+.nav-detail-wrap,
+.nav-check-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: var(--nav-height);
+
+  background: var(--bg);
+  box-shadow: var(--shadow-01);
+}
+
+.nav-detail-wrap {
+  flex-basis: var(--pane-width);
+  padding: var(--padding);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.nav-filter-wrap {
+  flex-basis: 700px;
+  padding: 0 var(--padding);
+  justify-content: left;
+}
+
+.nav-checkbox {
+  cursor: pointer;
+  height: var(--node-size);
+  width: var(--node-size);
+  border-radius: 50%;
+  margin: 0 var(--padding);
+
+  box-shadow: var(--shadow-01);
+  background-color: var(--hl);
+}
+
+.nav-check {
+  position: absolute;
+  margin: var(--node-stroke);
+  width: var(--node-inner);
+  height: var(--node-inner);
+  border-radius: 50%;
+  box-shadow: var(--shadow-01);
+  background-color: var(--bg);
+  transition: all 0.3s var(--ease);
+  transform: scale(0);
+}
+
+.nav-checkbox:hover {
+  box-shadow: var(--shadow-02);
+}
+
+.nav-checked {
+  background-color: var(--bg);
+  transform: scale(1);
+}
+
+/* .nav-label{  
+    letter-spacing: 0.1em;
+} */

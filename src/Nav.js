@@ -1,18 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import DetailPane from './DetailPane'
+import './Nav.css'
 
 class Check extends Component {
     render() {
 
-        const style = {
-            display: 'flex',
-            flexDirection: 'row'
-        }
-
         return (
-            <div style={style}>
-                <input type="checkbox" checked={this.props.checked} onChange={() => this.props.callback(this.props.type)} />
-                <div>{this.props.type}</div>
+            <div className='nav-check-wrap'>
+                <div className={`nav-checkbox ivr-${this.props.type}`} onClick={() => this.props.callback(this.props.type)}>
+                <div className={`nav-check ${!this.props.checked ? '' : 'nav-checked' }`} />    
+                </div>
+                <div className='nav-label'>{this.props.label}</div>
             </div>
         )
     }
@@ -56,53 +54,34 @@ class Nav extends Component {
 
 
     render() {
-        const style = {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            padding: 20,
-            display: 'flex',
-            flexDirection: 'row',
-            width: 'calc(100% - 40px)',
-            justifyContent: 'space-between'
-        }
 
         const styleChecks = {
             display: 'flex',
             flexDirection: 'row'
         }
 
-        const styleDetail = {
-            position: 'fixed',
-            top: 40,
-            right: 0,
-            padding: 20,
-            background:'white',
-            boxShadow:'0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
-        }
 
         return (
             <Fragment>
-                <div style={style}>
+                <div className='nav-wrap'>
 
-                    <div style={styleChecks}>
+                    <div className='nav-filter-wrap'>
+                    <div className='nav-label'>Filter</div>
                         {this.state.types.map(t => {
-                            return <Check key={t.type} type={t.type} checked={t.checked} callback={this.handleCheck} />
+                            return <Check key={t.type} type={t.type} label={'Indigenous ' + t.type} checked={t.checked} callback={this.handleCheck} />
                         })}
                     </div>
 
-                    <div style={styleChecks}>
-                        { this.props.node ? <div>{this.props.node.Name}</div> : null}
-                        <Check type={'detail'} checked={this.state.detail} callback={this.handleDetail} />
+                    <div className='nav-detail-wrap'>
+                        {this.props.node ? <div>{this.props.node.Name}</div> : <div></div>}
+                        <Check type={'Detail'} label={'Detail'} checked={this.state.detail} callback={this.handleDetail} />
                     </div>
 
                 </div>
                 {
-                    this.state.detail && this.props.node ? (
-                        <div style={styleDetail}>
-                            <DetailPane node={this.props.node} />
-                        </div>
-                    ) : (null)
+                    !(this.state.detail) ? null : (
+                        <DetailPane node={this.props.node} />
+                    )
                 }
             </Fragment>
         )

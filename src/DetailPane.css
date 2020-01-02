@@ -1,0 +1,88 @@
+.detail-pane {
+  position: fixed;
+  top: var(--nav-height);
+  right: 0px;
+  background: var(--bg);
+  box-shadow: var(--shadow-01);
+  width: var(--pane-width);
+}
+
+.detail-scroll{
+}
+
+.thumb-vertical{
+    background-color: var(--hl) ;
+}
+
+.detail-wrap {
+  position: "relative";
+  width: 100%;
+  padding: var(--padding);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.detail-center{
+    display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.detail-row > div > * {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.detail-row-right {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.detail-row-left {
+  flex-shrink: 0;
+}
+
+.detail-row-right > div {
+  margin-left: var(--padding);
+}
+
+.detail-row-right > :only-child {
+  margin-left: auto;
+}
+
+.detail-player-wrap {
+  position: relative;
+  padding-top: 56.25%;
+  width: 100%;
+}
+
+.detail-player {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.detail-img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--hl);
+  transition: all 2s var(--ease);
+}
+
+a:hover {
+  color: var(--ll);
+}

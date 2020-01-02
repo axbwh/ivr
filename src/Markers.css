@@ -1,0 +1,66 @@
+.ivr-marker {
+  cursor: pointer;
+  height: var(--node-size);
+  width: var(--node-size);
+  border-radius: 50%;
+
+  box-shadow: var(--shadow-01);
+  background-color: var(--hl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ivr-mark {
+  position: absolute;
+  width: var(--node-inner);
+  height: var(--node-inner);
+  border-radius: 50%;
+  box-shadow: var(--shadow-01);
+  background-color: var(--bg);
+  transition: all 0.3s var(--ease);
+  transform: scale(0);
+}
+
+.ivr-marker:hover {
+  box-shadow: var(--shadow-02);
+  z-index:500;
+}
+
+.ivr-marker-active{
+    z-index:5000000
+}
+
+.ivr-mark-selected {
+  background-color: var(--bg);
+  transform: scale(1);
+}
+
+.ivr-mark-label-wrap{
+    line-height: 0;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.12))
+}
+
+.ivr-mark-label {   
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+}
+
+.ivr-mark-stroke{
+-webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: var(--bg);
+}
+
+.ivr-Led {
+  background-color: var(--Led);
+}
+
+.ivr-Collaboration {
+  background-color: var(--Collaboration);
+}
+
+.ivr-Inspired {
+  background-color: var(--Inspired);
+}
