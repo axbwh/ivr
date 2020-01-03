@@ -1,17 +1,12 @@
 .detail-pane {
-  position: fixed;
-  top: var(--nav-height);
-  right: 0px;
+  float: right;
   background: var(--bg);
   box-shadow: var(--shadow-01);
   width: var(--pane-width);
 }
 
-.detail-scroll{
-}
-
-.thumb-vertical{
-    background-color: var(--hl) ;
+.thumb-vertical {
+  background-color: var(--hl);
 }
 
 .detail-wrap {
@@ -23,8 +18,8 @@
   box-sizing: border-box; /* Opera/IE 8+ */
 }
 
-.detail-center{
-    display: flex;
+.detail-center {
+  display: flex;
   justify-content: center;
   width: 100%;
 }
@@ -77,12 +72,5 @@
   width: 100%;
 }
 
-a {
-  text-decoration: none;
-  color: var(--hl);
-  transition: all 2s var(--ease);
-}
 
-a:hover {
-  color: var(--ll);
-}
+

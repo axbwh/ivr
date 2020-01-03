@@ -12,7 +12,6 @@ class DetailPane extends Component {
         return (
             <div className='detail-pane'>
                 <Scrollbars
-                    autoWidth
                     autoHeight
                     autoHeightMin={0}
                     autoHeightMax={'60vh'}
@@ -25,7 +24,7 @@ class DetailPane extends Component {
                                 <i>Select A Node to View Project Details</i>
                             </div> : <Fragment>
                                 {this.parseMedia(this.props.node.Media, this.props.node.Website)}
-                                {this.row('Indigenous |', this.props.node.Type)}
+                                { !this.props.node.Type ? null : <div className='detail-row'><h1> {`Indigenous ${this.props.node.Type}`}</h1></div>}
                                 {this.row('Indigenous Nation |', this.props.node.IndigenousNation)}
                                 {this.row('Platform |', this.props.node.Platform)}
                                 {this.row('Website |', this.parseWebsite(this.props.node.Website))}

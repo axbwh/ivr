@@ -1,13 +1,13 @@
 :root {
-  --fg: #2d2d2e;
+  --fg: #3E4348;
   --bg: #f2f2f2;
-  --hl: #f2835b;
-  --ll: #4A98A8;
-  --sll: #9DE5F5;
+  --hl: #548687;
+  --ll: #56445D;
+  --sll: #8FBC94;;
 
-  --Led: #4A98A8;
-  --Collaboration: #9DE5F5;
-  --Inspired:#f2835b;
+  --Led: #C5E99B;
+  --Collaboration: #548687;
+  --Inspired:#56445D;
 
   --padding: 24px;
 
@@ -24,6 +24,19 @@
 
 }
 
+@media only screen and (max-width: 916px) {
+  :root{
+    --pane-width: 100vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  :root{
+    --padding: 16px;
+  }
+}
+
+
 
 body {
   margin: 0;
@@ -34,4 +47,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--fg);
+}
+
+h1{
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--hl);
+  transition: all 0.3s var(--ease);
+}
+
+a:hover {
+  color: var(--ll);
 }

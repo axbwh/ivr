@@ -4,13 +4,16 @@ import './Nav.css'
 
 class Check extends Component {
     render() {
-
+        const label = this.props.bold ? <h1 className='nav-label mobile desktop'>{this.props.label}</h1>: <div className='nav-label desktop'>{this.props.label}</div>
+        const shortLabel = this.props.type === 'Collaboration' ? 'Collab' : this.props.type
+        
         return (
-            <div className='nav-check-wrap'>
-                <div className={`nav-checkbox ivr-${this.props.type}`} onClick={() => this.props.callback(this.props.type)}>
+            <div className='nav-check-wrap' onClick={() => this.props.callback(this.props.type)}>
+                <div className={`nav-checkbox ivr-${this.props.type}`} >
                 <div className={`nav-check ${!this.props.checked ? '' : 'nav-checked' }`} />    
                 </div>
-                <div className='nav-label'>{this.props.label}</div>
+                {label} 
+                {this.props.bold ? null : <div className='nav-label mobile'>{shortLabel}</div>}     
             </div>
         )
     }
@@ -62,19 +65,20 @@ class Nav extends Component {
 
 
         return (
-            <Fragment>
+            <div className='nav-static'>
                 <div className='nav-wrap'>
 
                     <div className='nav-filter-wrap'>
-                    <div className='nav-label'>Filter</div>
+                    <h1 className='nav-label desktop'>Filter</h1>
                         {this.state.types.map(t => {
+
                             return <Check key={t.type} type={t.type} label={'Indigenous ' + t.type} checked={t.checked} callback={this.handleCheck} />
                         })}
                     </div>
 
                     <div className='nav-detail-wrap'>
-                        {this.props.node ? <div>{this.props.node.Name}</div> : <div></div>}
-                        <Check type={'Detail'} label={'Detail'} checked={this.state.detail} callback={this.handleDetail} />
+                        {this.props.node ? <h1>{this.props.node.Name}</h1> : <h1></h1>}
+                        <Check type={'Detail'} label={'Detail'} bold={true} checked={this.state.detail} callback={this.handleDetail} />
                     </div>
 
                 </div>
@@ -83,7 +87,7 @@ class Nav extends Component {
                         <DetailPane node={this.props.node} />
                     )
                 }
-            </Fragment>
+            </div>
         )
     }
 }

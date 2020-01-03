@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Map from './Map'
 import Loader from './Loader'
-import Data, {TOKEN} from './Data'
+import Brand from './Brand'
+
+import Data from './Data'
 import 'mapbox-gl/src/css/mapbox-gl.css'
 import './App.css'
 
@@ -11,15 +13,23 @@ class App extends Component {
     super()
     this.state = {
       projects: [],
-      isFetching: true
+      isFetching: true,
+      isLoading: true,
     }
     this.onDataLoad = this.onDataLoad.bind(this)
+    this.onReady = this.onReady.bind(this)
   }
 
   onDataLoad = data => {
     this.setState({
       projects: data,
       isFetching: false
+    })
+  }
+
+  onReady(){
+    this.setState({
+      isLoading: false
     })
   }
 
@@ -30,8 +40,9 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        {this.state.isFetching ? <Loader /> :
-          <Map projects={this.state.projects} callback={this.getFocusNode}/>
+        {this.state.isLoading ? <Loader/> : <Brand />}
+        {this.state.isFetching ? null :
+          <Map projects={this.state.projects} callback={this.onReady}/>
         }
       </div>
     )

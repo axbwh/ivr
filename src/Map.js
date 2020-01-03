@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactMapGL from 'react-map-gl'
 import Nav from './Nav'
 import './Map.css'
+import _ from 'lodash'
 
 import { TOKEN } from './Data'
 import OrderNodes from './MapUtils'
@@ -15,8 +16,6 @@ class Map extends Component {
         super(props)
         this.state = {
             viewport: {
-                width: "100%",
-                height: "100vh",
                 longitude: 5,
                 latitude: 34,
                 zoom: 1.5,
@@ -34,13 +33,14 @@ class Map extends Component {
         this.filterNodes = this.filterNodes.bind(this)
         this.getFocusNode = this.getFocusNode.bind(this)
         this.getHoverNode = this.getHoverNode.bind(this)
+        this._updateViewport = this._updateViewport.bind(this)
     }
 
     _updateViewport = viewport => {
         this.setState({ viewport });
     }
 
-    orderNodes() {
+    orderNodes(callback) {
         this.setState(prevState => {
             let newProjects = [...prevState.projects]
 
@@ -60,7 +60,6 @@ class Map extends Component {
     }
 
     getHoverNode = node => {
-        console.log(node)
         this.setState({ hover: node })
     }
 
@@ -76,8 +75,11 @@ class Map extends Component {
             <div>
                 <ReactMapGL
                     {...viewport}
+                    width="100%"
+                    height="100vh"
                     mapStyle="mapbox://styles/axbwh/ck4n9ufn50bor1cp62o1oa5yp"
                     onViewportChange={this._updateViewport}
+                    onLoad={this.props.callback}
                     dragRotate={false}
                     mapboxApiAccessToken={TOKEN}
                     ref={this.mapRef}
@@ -90,7 +92,7 @@ class Map extends Component {
                         hover={this.state.hover}
                         active={this.state.node}
                     />
-                    
+
                 </ReactMapGL>
                 <Nav node={this.state.node} callback={this.filterNodes} />
             </div>

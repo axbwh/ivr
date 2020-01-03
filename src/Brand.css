@@ -1,0 +1,33 @@
+.ivr-brand{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 18px;
+
+    position: fixed;
+
+    bottom: var(--padding);
+    left: var(--padding);
+
+    fill: var(--hl);
+    color:  var(--hl);
+    
+    z-index: 500;
+}
+
+.ivr-brand h1{
+    margin-bottom: 10px;
+    writing-mode: vertical-lr;
+    transform: rotateZ(180deg);
+    transition: letter-spacing 0.3s var(--ease);
+}
+
+.ivr-brand:hover{
+    fill: var(--ll);
+    color:  var(--ll);
+}
+
+.ivr-brand:hover h1{
+    letter-spacing: 0.3em;
+}
