@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactMapGL from 'react-map-gl'
 import Nav from './Nav'
 import './Map.css'
-import _ from 'lodash'
 
 import { TOKEN } from './Data'
 import OrderNodes from './MapUtils'

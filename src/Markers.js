@@ -1,6 +1,6 @@
 import React from 'react'
 import { Marker } from 'react-map-gl'
-import getInitials from './GetInitials'
+import GetInitials from './GetInitials'
 import './Markers.css'
 
 const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led', 'Collaboration', 'Inspired'], hover, active }) => {
@@ -17,13 +17,14 @@ const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led'
                     <div className={`ivr-mark ${active === p ? 'ivr-mark-selected' : ''}`} />
 
                     <div className='ivr-mark-label-wrap'>
-                    <div className='ivr-mark-label ivr-mark-stroke'>{hover === p || active === p ? p.Name : getInitials(p.Name, 8, false)}</div>
-                        <div className='ivr-mark-label'>{hover === p || active === p ? p.Name : getInitials(p.Name, 8, false)}</div>
+                    <div className='ivr-mark-label ivr-mark-stroke'>{hover === p || active === p ? p.Name : GetInitials(p.Name, 8, false)}</div>
+                        <div className='ivr-mark-label'>{hover === p || active === p ? p.Name : GetInitials(p.Name, 8, false)}</div>
                     </div>
 
                 </div>
             </Marker>
         }
+        return null
     })
 
 })

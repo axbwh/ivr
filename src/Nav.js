@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import DetailPane from './DetailPane'
 import './Nav.css'
 
@@ -58,12 +58,6 @@ class Nav extends Component {
 
     render() {
 
-        const styleChecks = {
-            display: 'flex',
-            flexDirection: 'row'
-        }
-
-
         return (
             <div className='nav-static'>
                 <div className='nav-wrap'>
@@ -77,7 +71,7 @@ class Nav extends Component {
                     </div>
 
                     <div className='nav-detail-wrap'>
-                        {this.props.node ? <h1>{this.props.node.Name}</h1> : <h1></h1>}
+                        {this.props.node ? <h1>{this.props.node.Name}</h1> : <div></div>}
                         <Check type={'Detail'} label={'Detail'} bold={true} checked={this.state.detail} callback={this.handleDetail} />
                     </div>
 
