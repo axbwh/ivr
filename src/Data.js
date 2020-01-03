@@ -1,6 +1,7 @@
 import Tabletop from 'tabletop'
 import mapboxGeo from '@mapbox/mapbox-sdk/services/geocoding'
 import _ from 'lodash'
+import { isLogicalExpression } from '@babel/types'
 
 const tableKey = 'https://docs.google.com/spreadsheets/d/1-sK-WkmTl6jxObbsbMDxJtLcMQGbev7U0Xed0barAeQ/edit?usp=sharing'
 const TOKEN = 'pk.eyJ1IjoiYXhid2giLCJhIjoiY2s0bmpmZWlrMzNqYTNubmFhdzRpcWpwciJ9.suGRP9vc9Hv2POzpHBQ3-g'
@@ -27,6 +28,9 @@ class Data {
     processData = data => {
 
         data.forEach(p =>{
+            console.log(p.Location)
+            p.Location = p.Location.replace(/[^\w ]/g, '')
+            console.log(p.Location)
             p.x = 0
             p.y = 0
         })
@@ -57,9 +61,10 @@ class Data {
 
         //Once all geocoding promises are done, store query and latlng center in array
         Promise.all(geoPromises).then(results => {
+            
 
             let geoQueries = results.map(r => {
-                return { query: r.body.query[0], center: r.body.features[0].center }
+                return { query: r.body.query.join(' '), center: r.body.features[0] ? r.body.features[0].center : [0,0] }
             })
 
             //iterate over query results, and add lng/lat to every matching project
@@ -73,7 +78,7 @@ class Data {
                 })
             })
 
-            let dataParsed = projectsQry.concat(projectsGeo)
+            let dataParsed = projectsQry.concat(projectsGeo).filter(p => isLat(p.Lat) && isLng(p.Lng))
 
             dataParsed.forEach(p => {
                 p.sLng = p.Lng 
