@@ -3,7 +3,7 @@ import { Marker } from 'react-map-gl'
 import GetInitials from './GetInitials'
 import './Markers.css'
 
-const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led', 'Collaboration', 'Inspired'], hover, active }) => {
+const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led', 'Partnership', 'Collaboration'], hover, active }) => {
     let size = 30
     return projects.map(p => {
         if (query.includes(p.Type)) {

@@ -23,7 +23,7 @@ class Map extends Component {
             },
             activeNode: null,
             projects: this.props.projects,
-            query: ['Led', 'Collaboration', 'Inspired'],
+            query: ['Led', 'Partnership', 'Collaboration'],
             node: null,
             hover: null
         }

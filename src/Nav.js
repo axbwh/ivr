@@ -25,8 +25,8 @@ class Nav extends Component {
         super(props)
         this.state = {
             types: [{ type: 'Led', checked: true },
-            { type: 'Collaboration', checked: true },
-            { type: 'Inspired', checked: true }],
+            { type: 'Partnership', checked: true },
+            { type: 'Collaboration', checked: true }],
             detail: true
         }
         this.handleCheck = this.handleCheck.bind(this)
