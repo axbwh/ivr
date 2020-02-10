@@ -28,9 +28,7 @@ class Data {
     processData = data => {
 
         data.forEach(p =>{
-            console.log(p.Location)
             p.Location = p.Location.replace(/[^\w ]/g, '')
-            console.log(p.Location)
             p.x = 0
             p.y = 0
         })
@@ -70,7 +68,6 @@ class Data {
             //iterate over query results, and add lng/lat to every matching project
             geoQueries.forEach(g => {
                 projectsQry.forEach(p => {
-                    // console.log(p.Location.toLowerCase(), g.query)
                     if (p.Location.toLowerCase() === g.query) {
                         p.Lng = g.center[0]
                         p.Lat = g.center[1]

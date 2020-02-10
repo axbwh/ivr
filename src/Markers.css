@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .ivr-mark {
@@ -20,6 +21,12 @@
   background-color: var(--bg);
   transition: all 0.3s var(--ease);
   transform: scale(0);
+}
+
+.ivr-marker svg{
+  position: absolute;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
+  z-index: -1;
 }
 
 .ivr-marker:hover {
@@ -56,12 +63,15 @@
 
 .ivr-Led {
   background-color: var(--Led);
+  stroke: var(--Led);
 }
 
 .ivr-Partnership {
   background-color: var(--Partnership);
+  stroke: var(--Partnership);
 }
 
 .ivr-Collaboration {
   background-color: var(--Collaboration);
+  stroke: var(--Collaboration);
 }

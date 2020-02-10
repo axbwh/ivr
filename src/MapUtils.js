@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl'
 import _ from 'lodash'
 
 let markerSize = 30
+let TWOPI = Math.PI * 2 
 
 const withinDist = (a, b, dist) => {
     return Math.hypot(a.x - b.x, a.y - b.y) <= dist
@@ -17,24 +18,71 @@ const getCentroid = (arr) => {
     return bounds.getCenter()
 }
 
-const circleRadius = (arr, nodesize = 30, padding = 25) => {
+const circle = (arr, center, nodesize = 30, padding = 25) => {
     let circum = arr.length * nodesize + arr.length * padding
-    let radius = circum / (2 * Math.PI)
-    return radius > nodesize ? radius : nodesize
+    let radius = circum / TWOPI
+
+    radius = radius > nodesize ? radius : nodesize
+
+    arr.forEach((p, i) => {
+        p.Lng = center.lng
+        p.Lat = center.lat
+
+        if (arr.length > 1) {
+            let angle = TWOPI / arr.length * i
+
+            p.x = Math.sin(angle) * radius
+            p.y = Math.cos(angle) * radius
+            p.angle = angle + ( Math.PI / 2)
+            p.offset = radius
+
+
+        }
+    })
 }
+
+function spiral(arr, center) {
+
+    const options = {
+        lengthStart : 30,
+        footSeparation: 30,
+        lengthFactor: 1.75
+    }
+    
+    var legLength = options.lengthStart,
+      angle = 0;
+
+    arr.forEach((p, i) => {
+        p.Lng = center.lng
+        p.Lat = center.lat
+
+      angle = angle + (options.footSeparation / legLength + i * 0.0005);
+
+      p.x = legLength * Math.sin(angle)
+      p.y = legLength * Math.cos(angle)
+      p.angle = angle + Math.PI / 2
+      p.offset = legLength
+
+      legLength = legLength +  (TWOPI * options.lengthFactor / angle)
+
+    })
+
+  }
 
 const orderNodes = (projects, map, query) => {
 
     projects.forEach((p, i) => {
         p.x = 0
         p.y = 0
+        p.offset = 0
+        p.angle = 0
         p.Lat = p.sLat
         p.Lng = p.sLng
     })
     //filter out nodes not in type query (array of checked project types)
     projects = projects.filter(p => query.includes(p.Type))
 
-    let groupDist = markerSize * 2
+    let groupDist = markerSize * 2.5
 
     //get latlng of each marker, project it to a px based xy, and map those value to an array
     let allPos = projects.map(p => map.project([p.Lng, p.Lat]))
@@ -54,20 +102,11 @@ const orderNodes = (projects, map, query) => {
     groupPos.forEach(g => {
         let groupCenter = getCentroid(g.map(p => [p.Lng, p.Lat]))
 
-        let radius = circleRadius(g, 30, 25)
-
-        g.forEach((p, i) => {
-            p.Lng = groupCenter.lng
-            p.Lat = groupCenter.lat
-
-            if (g.length > 1) {
-                let angle = Math.PI * 2 / g.length * i
-
-                p.x = Math.sin(angle) * radius
-                p.y = Math.cos(angle) * radius
-            }
-        })
-
+        if(g.length > 6){
+            spiral(g, groupCenter)
+        }else{
+            circle(g, groupCenter)
+        }
     })
 }
 

@@ -24,11 +24,12 @@ class DetailPane extends Component {
                                 <i>Select A Node to View Project Details</i>
                             </div> : <Fragment>
                                 {this.parseMedia(this.props.node.Media, this.props.node.Website)}
-                                { !this.props.node.Type ? null : <div className='detail-row'><h1> {`Indigenous ${this.props.node.Type}`}</h1></div>}
-                                {this.row('Indigenous Nation |', this.props.node.IndigenousNation)}
-                                {this.row('Platform |', this.props.node.Platform)}
+                                {this.row('Indigenous ' + this.props.node.Type, this.props.node.Year, true, true)}
+                                {this.parseList('Indigenous Nation', this.props.node.IndigenousNation)}
+                                {this.parseList('Medium', this.props.node.Medium)}
+                                {this.parseList('Platform', this.props.node.Platform)}
                                 {this.row('Website |', this.parseWebsite(this.props.node.Website))}
-                                {this.parseCreatives(this.props.node.Creatives)}
+                                {this.parseList('Creative', this.props.node.Creatives)}
                                 {this.parseResume(this.props.node.Resume)}
                             </Fragment>
                         }
@@ -40,14 +41,16 @@ class DetailPane extends Component {
         )
     }
 
-    row(left, right) {
+    row(left, right, bold = false, vital = false) {
 
-        return !right ? null : (
-            <div className='detail-row'>
-                <div className='detail-row-left'><div>{left}</div></div>
-                <div className='detail-row-right'><div>{right}</div></div>
-            </div>
-        )
+        let style = !bold ? '' : ' bold'
+
+        let el = (<div className={'detail-row' + style}>
+                    { !left ? null : <div className='detail-row-left'><div>{left}</div></div>}
+                    { !right ? null : <div className='detail-row-right'><div>{right}</div></div>}
+                 </div> )
+
+        return !right && !vital ? null : el
     }
 
 
@@ -84,15 +87,22 @@ class DetailPane extends Component {
         )
     }
 
-    parseCreatives(creatives) {
+    parseList(lbl, lst) {
 
-        const array = creatives.split(',')
+        const list = lst.toLowerCase() === 'unknown' ? false : lst
 
-        return !creatives ? null : (
-            <div className='detail-row'>
-                <div className='detail-row-left'><div>Creatives |</div></div>
-                <div className='detail-row-right'>{array.map(c => <div key={c}>{c}</div>)}</div>
-            </div>
+        if(!list) return
+
+        const array = list.split(',').map( i => i.trim())
+
+        const label = array.length > 1 ? lbl + 's |' : lbl + ' |'
+
+        return (
+                <div className='detail-row'>
+                    <div className='detail-row-left'><div>{label}</div></div>
+                    <div className='detail-row-right'>{array.map(c => <div key={c}>{c}</div>)}</div>
+                </div>
+
         )
     }
 

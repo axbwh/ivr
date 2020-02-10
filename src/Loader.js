@@ -10,7 +10,7 @@ class Loader extends Component {
         return (
             <div className='ivr-loader'>
             <Logo className='ivr-logo'/>
-            <h1 className='ivr-title'>Indigenous <br/>VR</h1>
+            <h1 className='ivr-title'>Fourth <br/>VR</h1>
             </div>
         )
     }

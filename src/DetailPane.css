@@ -38,10 +38,11 @@
 }
 
 .detail-row-right {
-  display: flex;
+  display: block;
+  /* display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  flex-grow: 1;
+  flex-grow: 1; */
 }
 
 .detail-row-left {
@@ -49,7 +50,8 @@
 }
 
 .detail-row-right > div {
-  margin-left: var(--padding);
+  /* margin-left: var(--padding); */
+  text-align: right;
 }
 
 .detail-row-right > :only-child {
@@ -70,6 +72,10 @@
 
 .detail-img {
   width: 100%;
+}
+
+.bold{
+  font-weight: 600;
 }
 
 
