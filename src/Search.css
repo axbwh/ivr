@@ -1,0 +1,12 @@
+.search-wrap{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: var(--pane-width);
+    
+}
+
+.search-wrap input{
+width: 100%;
+padding: 5px var(--padding);
+}

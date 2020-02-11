@@ -21,7 +21,7 @@ const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led'
                 <div onClick={() => active === p ? handleClick(null) : handleClick(p)}
                     onMouseEnter={() => handleHover(p)}
                     onMouseLeave={() => handleHover(null)}
-                    className={`ivr-marker ivr-${p.Type} ${hover === p || active === p ? 'ivr-marker-active' : ''}`}
+                    className={`ivr-marker ivr-${p.Type} ivr-${p.Icon} ${hover === p || active === p ? 'ivr-marker-active' : ''}`}
                 >
                     {line}
                     <div className={`ivr-mark ${active === p ? 'ivr-mark-selected' : ''}`} />

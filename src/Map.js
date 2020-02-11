@@ -6,7 +6,7 @@ import './Map.css'
 import { TOKEN } from './Data'
 import OrderNodes from './MapUtils'
 import Markers from './Markers'
-
+import Search from './Search'
 
 class Map extends Component {
     mapRef = React.createRef()
@@ -94,6 +94,11 @@ class Map extends Component {
 
                 </ReactMapGL>
                 <Nav node={this.state.node} callback={this.filterNodes} />
+                <Search 
+                projects={this.state.projects}
+                handleClick={this.getFocusNode}
+                handleHover={this.getHoverNode}
+                />
             </div>
         )
     }

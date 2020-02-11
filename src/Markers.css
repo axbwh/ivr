@@ -2,10 +2,6 @@
   cursor: pointer;
   height: var(--node-size);
   width: var(--node-size);
-  border-radius: 50%;
-
-  box-shadow: var(--shadow-01);
-  background-color: var(--hl);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,13 +10,12 @@
 
 .ivr-mark {
   position: absolute;
-  width: var(--node-inner);
-  height: var(--node-inner);
+  height: var(--node-size);
+  width: var(--node-size);
   border-radius: 50%;
   box-shadow: var(--shadow-01);
-  background-color: var(--bg);
+  box-shadow: var(--shadow-01);
   transition: all 0.3s var(--ease);
-  transform: scale(0);
 }
 
 .ivr-marker svg{
@@ -29,19 +24,23 @@
   z-index: -1;
 }
 
-.ivr-marker:hover {
-  box-shadow: var(--shadow-02);
+.ivr-marker:hover .ivr-mark-label-wrap{
   z-index:500;
+}
+
+.ivr-marker:hover .ivr-mark {
+  box-shadow: var(--shadow-02);
+  
 }
 
 .ivr-marker-active{
     z-index:5000000
 }
 
-.ivr-mark-selected {
+/* .ivr-mark-selected {
   background-color: var(--bg);
   transform: scale(1);
-}
+} */
 
 .ivr-mark-label-wrap{
     line-height: 0;
@@ -61,17 +60,32 @@
   -webkit-text-stroke-color: var(--bg);
 }
 
-.ivr-Led {
+.ivr-Led .ivr-mark{
   background-color: var(--Led);
+}
+
+.ivr-Partnership .ivr-mark{
+  background-color: var(--Partnership);
+}
+
+.ivr-Collaboration .ivr-mark{
+  background-color: var(--Collaboration);
+}
+
+.ivr-Led{
   stroke: var(--Led);
 }
 
-.ivr-Partnership {
-  background-color: var(--Partnership);
+.ivr-Partnership{
   stroke: var(--Partnership);
 }
 
-.ivr-Collaboration {
-  background-color: var(--Collaboration);
+.ivr-Collaboration{
   stroke: var(--Collaboration);
 }
+
+.ivr-NationState .ivr-mark{
+  transform: rotate(45deg);
+  border-radius: 0%;
+}
+
