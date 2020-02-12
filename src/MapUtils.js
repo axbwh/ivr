@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl'
 import _ from 'lodash'
 
-let markerSize = 30
+let markerSize = 35
 let TWOPI = Math.PI * 2 
 
 const withinDist = (a, b, dist) => {
@@ -18,7 +18,7 @@ const getCentroid = (arr) => {
     return bounds.getCenter()
 }
 
-const circle = (arr, center, nodesize = 30, padding = 25) => {
+const circle = (arr, center, nodesize = 35, padding = 25) => {
     let circum = arr.length * nodesize + arr.length * padding
     let radius = circum / TWOPI
 

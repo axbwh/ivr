@@ -9,7 +9,8 @@ class Search extends Component {
     super(props)
 
     const options = {
-      keys: ['Name', 'Year', 'IndigenousNation']
+      keys: ['Name', 'Year', 'IndigenousNation'],
+      threshold: 0.4,
     }
     this.fuse = new Fuse(this.props.projects, options)
     this.state = {
@@ -21,7 +22,7 @@ class Search extends Component {
 
   componentDidMount() {
     this.fuse.setCollection(this.props.projects)
-    // document.addEventListener("mousedown", this.handleClickOutside);
+    document.addEventListener("mousedown", this.handleBlur);
   }
 
   handleChange = event => {
@@ -46,22 +47,10 @@ class Search extends Component {
   }
 
   handleBlur = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
     this.setState({ ...this.state, displayResults: false })
+    }
   }
-
-  //   handleNodeHover = item => {
-  //     cytoscapeStore.hoveredNode = item.id;
-  //   };
-
-  //   handleNodeUnHover = () => {
-  //     cytoscapeStore.hoveredNode = null;
-  //   };
-
-  //   handleSelect = item => {
-  //     cytoscapeStore.hoveredNode = null;
-  //     cytoscapeStore.selectedNode = item.id;
-  //     this.setState({ ...this.state, displayResults: false, value: item.name });
-  //   };
 
   render() {
     return (
@@ -69,12 +58,12 @@ class Search extends Component {
         <SearchResults
           displayed={this.state.displayResults}
           results={this.state.results}
-          onHover={this.handleNodeHover}
-          //   onUnHover={this.handleNodeUnHover}
-          //   onSelect={this.handleSelect}
+          handleClick={this.props.handleClick}
+          handleHover={this.props.handleHover}
+          active={this.props.active}
         />
         <input
-        autocomplete="off"
+        autoComplete="off"
           type='text'
           id='autocomplete'
           placeholder='Search Projects'
@@ -82,7 +71,6 @@ class Search extends Component {
           value={this.state.value}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
         />
       </div>
     )

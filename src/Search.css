@@ -1,12 +1,79 @@
 .search-wrap{
     position: fixed;
-    right: 0;
+    left: 0;
     bottom: 0;
     width: var(--pane-width);
     
 }
 
-.search-wrap input{
-width: 100%;
-padding: 5px var(--padding);
+.search-wrap input {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    width: 100%;
+    padding: 5px var(--padding);
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
+    transition: all 0.3s var(--ease);
+}
+
+.search-wrap input:focus{
+    width: 100%;
+    padding: 5px var(--padding);
+    outline-color: var(--hl);
+}
+
+.search-list{
+    background: var(--bg);
+    box-shadow: var(--shadow-01);
+    bottom: 29px;
+}
+
+.search-item{
+    cursor: pointer;
+    padding: 5px calc(var(--padding) + 5px);
+    transition: all 0.3s var(--ease);
+    /* z-index: 1; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.search-item svg{
+    width: 10px;
+    position: absolute;
+    margin-left: calc(var(--padding) / -2 - 7.5px);
+}
+
+.search-item:hover{
+    box-shadow: var(--shadow-02);
+    /* z-index: 10; */
+    background-color: var(--bg);
+}
+
+.search-title{
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-nation{
+    font-size: 0.8em;
+}
+
+.search-item.Led{
+    fill: var(--Led);
+}
+
+.search-item.Collaboration{
+    fill: var(--Collaboration);
+}
+
+.search-item.Partnership{
+    fill: var(--Partnership);
 }

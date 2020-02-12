@@ -3,10 +3,10 @@ import Logo from './Logo'
 import './Brand.css'
 
 const Brand = props => (
-    <a href='https://www.wgtn.ac.nz/seftms' target="_blank" rel="noopener noreferrer" className='ivr-brand'>
+    <div onClick={ () => props.callback(true)} className='ivr-brand'>
         <h1>Fourth VR</h1>
         <Logo/>
-    </a>
+    </div>
 )
 
 export default Brand

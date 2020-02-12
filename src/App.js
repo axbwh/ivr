@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Map from './Map'
 import Loader from './Loader'
-import Brand from './Brand'
 
 import Data from './Data'
 import 'mapbox-gl/src/css/mapbox-gl.css'
@@ -40,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        {this.state.isLoading ? <Loader/> : <Brand />}
+        {this.state.isLoading ? <Loader/> : null}
         {this.state.isFetching ? null :
           <Map projects={this.state.projects} callback={this.onReady}/>
         }

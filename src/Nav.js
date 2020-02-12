@@ -9,7 +9,7 @@ class Check extends Component {
         
         return (
             <div className='nav-check-wrap' onClick={() => this.props.callback(this.props.type)}>
-                <div className={`nav-checkbox ivr-${this.props.type}`} >
+                <div className={`nav-checkbox ${this.props.type}`} >
                 <div className={`nav-check ${!this.props.checked ? '' : 'nav-checked' }`} />    
                 </div>
                 {label} 

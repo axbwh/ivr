@@ -1,17 +1,27 @@
 import React from "react";
-import "./SearchResults.css";
+import { Scrollbars } from 'react-custom-scrollbars'
+import {Square, Circle} from './Icons'
+import "./Search.css";
 
 function SearchItem(props) {
+
     return (
-      <li className="ui-menu-item">
-        <div className="ui-menu-item-wrapper"
-        //   onMouseEnter={() => props.onHover(props.item)}
-        //   onMouseLeave={props.onUnHover}
-        //   onClick={() => props.onSelect(props.item)}
+        <div key={props.key} className={`search-item ${props.item.Type}`}
+        onClick={() => props.active === props.item ? props.handleClick(null) : props.handleClick(props.item)}
+        onMouseEnter={() => props.handleHover(props.item)}
+        onMouseLeave={() => props.handleHover(null)}
         >
-          {props.item.Name}
+          { props.item.Icon === 'NationState' ? <Square/> : <Circle/> }
+          <div className='search-title'>
+            <div>{props.item.Name}</div>
+            <div>{props.item.Year}</div>
+          </div>
+          <div className='search-nation'>
+            <div>{props.item.IndigenousNation}</div>
+          </div>
+    
+          
         </div>
-      </li>
     );
   }
 
@@ -23,15 +33,21 @@ function SearchResults(props) {
     <SearchItem
       key={result.id}
       item={result}
-    //   onHover={props.onHover}
-    //   onUnHover={props.onUnHover}
-    //   onSelect={props.onSelect}
+      handleClick={props.handleClick}
+      handleHover={props.handleHover}
+      active={props.active}
     />
   ));
   return props.displayed ? (
-    <ul className="">
+    <Scrollbars
+                    autoHeight
+                    autoHeightMin={0}
+                    autoHeightMax={'30vh'}
+                    renderThumbVertical={props => <div {...props} className="thumb-vertical" />}>
+    <div className="search-list">
       {listItems}
-    </ul>
+    </div>
+    </Scrollbars>
   ) : null;
 }
 

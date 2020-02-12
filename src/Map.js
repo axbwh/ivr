@@ -7,6 +7,8 @@ import { TOKEN } from './Data'
 import OrderNodes from './MapUtils'
 import Markers from './Markers'
 import Search from './Search'
+import Brand from './Brand'
+import About from './About'
 
 class Map extends Component {
     mapRef = React.createRef()
@@ -25,7 +27,8 @@ class Map extends Component {
             projects: this.props.projects,
             query: ['Led', 'Partnership', 'Collaboration'],
             node: null,
-            hover: null
+            hover: null,
+            isAbout: false,
         }
 
         this.orderNodes = this.orderNodes.bind(this)
@@ -62,6 +65,10 @@ class Map extends Component {
         this.setState({ hover: node })
     }
 
+    getAbout = boolean => {
+        this.setState({ isAbout: boolean })
+    }
+
     componentDidMount() {
         this.map = this.mapRef.current.getMap()
         this.map.on('zoomend', this.orderNodes)
@@ -93,12 +100,15 @@ class Map extends Component {
                     />
 
                 </ReactMapGL>
-                <Nav node={this.state.node} callback={this.filterNodes} />
+                <Brand callback={this.getAbout} />
                 <Search 
                 projects={this.state.projects}
                 handleClick={this.getFocusNode}
                 handleHover={this.getHoverNode}
+                active={this.state.node}
                 />
+                <Nav node={this.state.node} callback={this.filterNodes} />
+                {this.state.isAbout ? <About callback={this.getAbout} /> : null}   
             </div>
         )
     }

@@ -1,0 +1,71 @@
+.ivr-about{
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top:0;
+    background-color: var(--bg);
+}
+
+.ivr-about .logo{
+    fill: var(--hl);
+    color: var(--hl);
+    transition: all 0.6s var(--ease);
+    cursor: pointer;
+}
+
+.ivr-about .logo:hover{
+    fill: var(--ll);
+    color: var(--ll);
+    transform: scale(1.05);
+}
+
+.ivr-about .logo:hover svg{
+    transform: scale(1.025);
+}
+
+.ivr-about .logo:hover h1{
+    letter-spacing: 0.2em;
+}
+
+.ivr-about .logo svg{
+    width: 82px;
+    opacity: 1;  
+    transition: transform 0.6s var(--ease);  
+}
+
+.ivr-about .logo h1{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: letter-spacing 0.6s var(--ease);  
+}
+
+.ivr-about .cross{
+    position: absolute;
+    stroke: var(--hl);
+    width: 24px;
+    cursor: pointer;
+    right: var(--padding);
+    bottom: var(--padding);
+    transition: all 0.3s var(--ease);
+}
+
+.ivr-about .paragraph{
+    max-width: 400px;
+    text-align: justify;
+    color: var(--hl);
+    padding: var(--padding);
+}
+
+.ivr-about .cross:hover{
+    transform: scale(1.2);
+    stroke: var(--ll);;
+}

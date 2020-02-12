@@ -72,6 +72,18 @@
   transform: scale(0);
 }
 
+.nav-checkbox.Led{
+  background-color: var(--Led);
+}
+
+.nav-checkbox.Collaboration{
+  background-color: var(--Collaboration);
+}
+
+.nav-checkbox.Partnership{
+  background-color: var(--Partnership);
+}
+
 .nav-check-wrap{
   cursor: pointer;
 }
