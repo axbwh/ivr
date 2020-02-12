@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import DetailPane from './DetailPane'
+import Key from './Key'
 import './Nav.css'
 
 class Check extends Component {
@@ -48,11 +49,17 @@ class Nav extends Component {
         },
             () => this.props.callback(this.state.types.filter(t => t.checked).map(t => t.type))
         )
-
     }
 
     handleDetail(detail) {
-        this.setState(prevState => { return { detail: !prevState.detail } })
+        this.setState(prevState => { return { detail: !prevState.detail } },
+            ()=> {
+                if(!this.state.detail){
+                    document.documentElement.style.setProperty('--detail-offset',"0px")                    
+                }else{
+                    document.documentElement.style.setProperty('--detail-offset', "calc(19px + var(--padding) * 2)")
+                }
+            })
     }
 
 
@@ -74,13 +81,14 @@ class Nav extends Component {
                         {this.props.node ? <h1>{this.props.node.Name}</h1> : <div></div>}
                         <Check type={'Detail'} label={'Detail'} bold={true} checked={this.state.detail} callback={this.handleDetail} />
                     </div>
-
                 </div>
+                <Key />
                 {
                     !(this.state.detail) ? null : (
                         <DetailPane node={this.props.node} />
                     )
                 }
+                
             </div>
         )
     }

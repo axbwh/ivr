@@ -3,6 +3,8 @@
     left: 0;
     bottom: 0;
     width: var(--pane-width);
+    z-index: 5;
+    box-shadow: var(--shadow-01-i);
     
 }
 
@@ -29,7 +31,7 @@
 
 .search-list{
     background: var(--bg);
-    box-shadow: var(--shadow-01);
+    
     bottom: 29px;
 }
 

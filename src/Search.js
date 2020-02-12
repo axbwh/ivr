@@ -70,7 +70,7 @@ class Search extends Component {
           spellCheck='false'
           value={this.state.value}
           onChange={this.handleChange}
-          onFocus={this.handleFocus}
+          onFocus={this.handleChange}
         />
       </div>
     )

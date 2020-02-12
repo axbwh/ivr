@@ -1,0 +1,23 @@
+.ivr-key {
+    position: absolute;
+    padding: var(--padding);
+    color:  var(--fg);
+    fill:  var(--fg);
+
+}
+
+.ivr-key .row{
+    display: flex;
+    align-items: center;
+    padding: calc(var(--padding) /4) 0;
+}
+
+.ivr-key svg{
+    width: 10px;
+    padding-right: calc(var(--padding) /2);
+}
+
+.ivr-key h1{
+    margin: 0px;
+    font-size: 0.8em;
+}

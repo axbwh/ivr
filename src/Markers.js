@@ -20,11 +20,11 @@ const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led'
                 ) : null
 
 
-            return <Marker  key={p.Name} longitude={p.Lng} latitude={p.Lat} offsetLeft={p.x - size / 2} offsetTop={p.y - size / 2}>
+            return <Marker  className={hover === p || active === p ? 'ivr-marker-active' : ''} key={p.Name} longitude={p.Lng} latitude={p.Lat} offsetLeft={p.x - size / 2} offsetTop={p.y - size / 2}>
                 <div onClick={() => active === p ? handleClick(null) : handleClick(p)}
                     onMouseEnter={() => handleHover(p)}
                     onMouseLeave={() => handleHover(null)}
-                    className={`ivr-marker ivr-${p.Type} ${hover === p || active === p ? 'ivr-marker-active' : ''}`}
+                    className={`ivr-marker ivr-${p.Type}`}
                 >
                     {line}
                     {/* <div className={`ivr-mark ${active === p ? 'ivr-mark-selected' : ''}`} /> */}
