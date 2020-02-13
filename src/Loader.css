@@ -27,10 +27,11 @@
 
 .ivr-title{
     color: var(--hl);
+    opacity: 1;
     animation: fadeIn 1s infinite alternate;
     text-align: center;
 }
 
 @keyframes fadeIn { 
-    from { fill: var(--ll); } 
+    from { opacity: 0; } 
   }
