@@ -4,7 +4,7 @@ import './Brand.css'
 
 const Brand = props => (
     <div onClick={ () => props.callback(true)} className='ivr-brand'>
-        <h1>Fourth VR</h1>
+        <h1>About Fourth VR</h1>
         <Logo/>
     </div>
 )

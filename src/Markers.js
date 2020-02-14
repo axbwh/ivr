@@ -14,7 +14,7 @@ const Markers = React.memo(({ projects, handleClick, handleHover, query = ['Led'
                 
 
                 const line = p.angle && p.offset ? (
-                    <svg className='ivr-line' style={ {transform : `rotate(${-p.angle}rad) translateX(${p.offset / 2}px)` }} width={p.offset} height='2'>  
+                    <svg className='ivr-line' style={ {transform : `rotate(${p.angle}rad) translateX(${p.offset / 2}px)` }} width={p.offset} height='2'>  
                         <line x1='0' y1='1' x2={p.offset} y2='1'/>
                     </svg>
                 ) : null

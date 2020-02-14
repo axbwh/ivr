@@ -82,7 +82,6 @@ class Nav extends Component {
                         <Check type={'Detail'} label={'Detail'} bold={true} checked={this.state.detail} callback={this.handleDetail} />
                     </div>
                 </div>
-                <Key />
                 {
                     !(this.state.detail) ? null : (
                         <DetailPane node={this.props.node} />

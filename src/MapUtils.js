@@ -33,7 +33,7 @@ const circle = (arr, center, nodesize = 35, padding = 25) => {
 
             p.x = Math.sin(angle) * radius
             p.y = Math.cos(angle) * radius
-            p.angle = angle + ( Math.PI / 2)
+            p.angle = - angle - ( Math.PI / 2) 
             p.offset = radius
 
 
@@ -60,8 +60,14 @@ function spiral(arr, center) {
 
       p.x = legLength * Math.sin(angle)
       p.y = legLength * Math.cos(angle)
-      p.angle = angle + Math.PI / 2
-      p.offset = legLength
+
+      if(i === 0){
+        p.angle = angle + Math.PI / 2
+        p.offset = legLength
+      }else{
+        p.angle = Math.atan2(arr[i-1].y - p.y, arr[i-1].x - p.x)
+        p.offset = Math.hypot(arr[i-1].x - p.x, arr[i-1].y - p.y) - 12
+      }
 
       legLength = legLength +  (TWOPI * options.lengthFactor / angle)
 

@@ -107,11 +107,11 @@ class DetailPane extends Component {
     }
 
     parseResume(resume) {
-
-        return !resume ? null : (
+       let paragraphs = !resume ? null : resume.split(/\r?\n/).map(s => s.trim()).filter(s => s)
+        return !paragraphs ? null : (
             <Fragment>
                 <hr />
-                <p>{resume}</p>
+                {paragraphs.map(p => <p>{p}</p>)}
             </Fragment>
         )
 

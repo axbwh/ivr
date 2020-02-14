@@ -1,10 +1,5 @@
 .ivr-about{
     z-index: 500;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
     width: 100%;
     height: 100vh;
 
@@ -12,6 +7,19 @@
     left: 0;
     top:0;
     background-color: var(--bg);
+}
+
+.ivr-about .content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--padding) * 2) 0 ;
+}
+
+.ivr-about .indent{
+    padding-left: calc(var(--padding) * 1);
 }
 
 .ivr-about .logo{
@@ -59,10 +67,21 @@
 }
 
 .ivr-about .paragraph{
-    max-width: 400px;
-    text-align: justify;
+    max-width: 450px;
+    /* text-align: justify; */
     color: var(--hl);
     padding: var(--padding);
+    /* width: 100%; */
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.ivr-about .paragraph svg{
+    display: inline;
+    width: 0.8em;
+    fill: var(--hl);
 }
 
 .ivr-about .cross:hover{

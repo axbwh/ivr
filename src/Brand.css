@@ -2,12 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    width: 18px;
+    flex-direction: row;
+    /* width: 18px; */
 
     position: fixed;
 
-    bottom: var(--padding);
+    bottom: calc(var(--padding) /2);
     right: var(--padding);
 
     fill: var(--hl);
@@ -16,16 +16,21 @@
     transition: fill 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
+.ivr-brand svg{
+    width: 20px;
+    /* height: 30px; */
+}
+
 
 @media only screen and (max-width: 916px) {
     .ivr-brand{
-        bottom: calc(var(--padding) + 29px);
+        bottom: calc(var(--padding)/2 + 29px);
     }
 }
 .ivr-brand h1{
-    margin-bottom: 10px;
-    writing-mode: vertical-lr;
-    transform: rotateZ(180deg);
+    margin-right: 10px;
+    /* writing-mode: vertical-lr;
+    transform: rotateZ(180deg); */
     transition: letter-spacing 0.3s var(--ease), color 0.3s var(--ease);
     
 }
