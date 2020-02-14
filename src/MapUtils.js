@@ -62,7 +62,7 @@ function spiral(arr, center) {
       p.y = legLength * Math.cos(angle)
 
       if(i === 0){
-        p.angle = angle + Math.PI / 2
+        p.angle = - angle - Math.PI / 2
         p.offset = legLength
       }else{
         p.angle = Math.atan2(arr[i-1].y - p.y, arr[i-1].x - p.x)
