@@ -107,7 +107,7 @@ class DetailPane extends Component {
     }
 
     parseResume(resume) {
-       let paragraphs = !resume ? null : resume.split(/\r?\n/).map(s => s.trim()).filter(s => s)
+       let paragraphs = !resume ? null : resume.replace(/[\u200B-\u200D\uFEFF]/g, ' ').split(/\r?\n|\r/).map(s => s.trim()).filter(s => s)
         return !paragraphs ? null : (
             <Fragment>
                 <hr />
