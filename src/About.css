@@ -88,3 +88,13 @@
     transform: scale(1.2);
     stroke: var(--ll);;
 }
+
+.ivr-about a{
+    color: var(--ll);
+    border-bottom: var(--ll) 1px solid;
+}
+
+.ivr-about a:hover{
+    color: var(--hl);
+    border-color: var(--hl);
+}

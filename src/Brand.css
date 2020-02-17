@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    
     /* width: 18px; */
 
     position: fixed;
@@ -17,7 +18,7 @@
 }
 
 .ivr-brand svg{
-    width: 20px;
+    width: 22px;
     /* height: 30px; */
 }
 
@@ -28,6 +29,7 @@
     }
 }
 .ivr-brand h1{
+    font-size: 14px;
     margin-right: 10px;
     /* writing-mode: vertical-lr;
     transform: rotateZ(180deg); */
