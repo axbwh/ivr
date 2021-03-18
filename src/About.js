@@ -32,7 +32,7 @@ class Loader extends Component {
                     <p>Overall this database presents a wide-angle, zoom-lens, picture of the landscape of Indigenous VR works. It offers a clear demonstration of the capacity of Indigenous creatives to produce their own narratives within the VR medium.</p>
                     <p>Keziah Wallis (Kāi Tahu)</p>
                     <p>Miriam Ross</p>
-                    <p>Questions about the database can be directed to <a href='mailto:miriam.ross@vuw.ac.nz'> miriam.ross@vuw.ac.nz</a>.</p>
+                    <p>Questions about the database can be directed to <a href='mailto:keziah.wallis@ufv.ca'> keziah.wallis@ufv.ca</a></p>
                 </div>
                 </div>
                 </Scrollbars>

@@ -1,0 +1,92 @@
+.ivr-marker {
+  cursor: pointer;
+  height: var(--node-size);
+  width: var(--node-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: filter 0.3s var(--ease);
+
+}
+
+.ivr-icon {
+  overflow: visible;
+  position: absolute;
+  height: var(--node-size);
+  width: var(--node-size);
+  filter: var(--shadow-01-f);
+  transition: all 0.3s var(--ease);
+  z-index: 0;
+}
+
+.ivr-line{
+  position: absolute;
+  stroke: var(--fg);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
+  z-index: 0;
+  transition: all 0.3s var(--ease);
+}
+
+.ivr-marker-active{
+  z-index:2;
+}
+
+.ivr-marker-active .ivr-marker{
+  filter: var(--shadow-02-f);
+}
+
+.ivr-marker-active .ivr-line {
+  stroke-width: 4px;
+}
+
+.ivr-marker-active .ivr-icon {
+  transform: scale(1.5);
+  stroke: var(--bg);
+  stroke-width: 1.25px;
+}
+
+.ivr-marker-active .ivr-mark-label-wrap {
+  font-size: 13px;
+}
+
+
+.ivr-mark-label-wrap{
+    line-height: 0;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.12));
+    font-size: 12px;
+    transition: all 0.3s var(--ease);
+    z-index: 2;
+    
+}
+
+
+
+.ivr-mark-label {   
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  
+}
+
+.ivr-mark-stroke{
+-webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: var(--bg);
+}
+
+.ivr-Led{
+  stroke: var(--Led);
+  fill: var(--Led);
+}
+
+.ivr-Partnership{
+  stroke: var(--Partnership);
+  fill: var(--Partnership);
+}
+
+.ivr-Collaboration{
+  stroke: var(--Collaboration);
+  fill: var(--Collaboration);
+}
+
