@@ -1,9 +1,9 @@
-import Tabletop from 'tabletop'
+import Papa from 'papaparse'
 import mapboxGeo from '@mapbox/mapbox-sdk/services/geocoding'
 import _ from 'lodash'
 import { isLogicalExpression } from '@babel/types'
 
-const tableKey = 'https://docs.google.com/spreadsheets/d/1-sK-WkmTl6jxObbsbMDxJtLcMQGbev7U0Xed0barAeQ/edit?usp=sharing'
+const tableKey = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQmoz1WW-r4vQ9mY-uQUCuPadVJrkdtVcnqYTFBJZfvEg4VNYzPdvJt14mbsV3-DuuJvN6ibVHyAXIu/pub?output=csv'
 const TOKEN = 'pk.eyJ1IjoiYXhid2giLCJhIjoiY2s0bmpmZWlrMzNqYTNubmFhdzRpcWpwciJ9.suGRP9vc9Hv2POzpHBQ3-g'
 
 const geocoding = mapboxGeo({ accessToken: TOKEN })
@@ -16,17 +16,36 @@ const isLng = (lng) => {
     return isFinite(parseFloat(lng)) && Math.abs(lng) <= 180;
 }
 
+// function toJson (filepath) {
+//     return new Promise((resolve, reject) => {
+//       Papa.parse(filepath, {
+//         download: true,
+//         header: true,
+//         complete (results) {
+//             console.log(results)
+//           resolve(results.data)
+//         },
+//         error (err) {
+//           reject(err)
+//         }
+//       })
+//     })
+//   }
+
 class Data {
+
+
     constructor(callback) {
         this.callback = callback
-        Tabletop.init({
-            key: tableKey,
-            simpleSheet: true
-        }).then(this.processData)
+        Papa.parse(tableKey, {
+            download: true,
+            header: true,
+            complete: this.processData
+          })
     }
 
     processData = data => {
-
+        data = data.data
         data.forEach(p =>{
             p.Location = p.Location.replace(/[^\w ]/g, '')
             p.x = 0
