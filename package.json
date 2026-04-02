@@ -18,7 +18,7 @@
     "react-image": "^2.4.0",
     "react-map-gl": "^5.3.10",
     "react-player": "^1.15.3",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^5.0.1",
     "tabletop": "^1.6.3"
   },
   "scripts": {
